@@ -105,13 +105,26 @@ function populateAppointmentTable() {
     });
 }
 
+function editAppointment(index) {
+	console.log(`Edit Appointment at index: ${index}`);
+
+    alert('Edit functionality not implemented.');
+}
+
+function addNewAppointment(index) {
+    alert('Add functionality not implemented.');
+}
+
 function confirmAppointment(index) {
+	console.log(`Confirm Appointment at index: ${index}`);
+
     data.appointments[index].status = 'Confirmed';
     populateAppointmentTable();
 }
 
 
 function deleteAppointment(index) {
+	console.log(`Delete Appointment at index: ${index}`);
     data.appointments.splice(index, 1);
     populateAppointmentTable();
 }
@@ -180,7 +193,7 @@ function displayUser() {
 }
 
 function logout() {
-    localStorage.removeItem('loggedInUser'); // Remove user data from localStorage
+   
 	 const messageDiv = document.createElement('div');
         messageDiv.textContent = 'Logged out successfully';
         messageDiv.style.backgroundColor = 'green';
@@ -193,19 +206,12 @@ function logout() {
         document.body.appendChild(messageDiv);
     setTimeout(() => {
         window.location.href = 'index.html';
-    
+     localStorage.removeItem('loggedInUser'); // Remove user data from localStorage
     }, 2000);
 }
 
-function editAppointment(index) {
-    alert('Edit functionality not implemented.');
-}
 
-function addAppointment(index) {
-    alert('Add functionality not implemented.');
-}
-
-function addUser(index) {
+function addNewUser(index) {
     alert('Add functionality not implemented.');
 }
 function editUser(index) {
