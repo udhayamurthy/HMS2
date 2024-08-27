@@ -1,6 +1,5 @@
 ﻿// Simulated JSON data
 const data = {
-	"version": "1.0.1",
     "users": [
         { "userID": "admin", "password": "Admin123", "name": "SYS ADMIN", "role": "ADMIN" },
         { "userID": "smith", "password": "Doctor123", "name": "Dr Smith Right", "role": "DOCTOR" },
@@ -30,15 +29,27 @@ const data = {
     ]
 };
 
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const togglePasswordIcon = document.querySelector('.toggle-password');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        togglePasswordIcon.textContent = '👁️'; // Change to an "eye" icon for visibility
+    } else {
+        passwordField.type = 'password';
+        togglePasswordIcon.textContent = '👁️'; // Change back to an "eye" icon for hidden
+    }
+}
+
 // Login function
+
 function login(event) {
     event.preventDefault();
     const userID = document.getElementById('userID').value;
     const password = document.getElementById('password').value;
-	 console.log(`Attempting login with UserID: ${userID}, Password: ${password}`);
     const user = data.users.find(u => u.userID === userID && u.password === password);
     if (user) {
-		  console.log(`Login successful for User: ${user.name}, Role: ${user.role}`);
         switch (user.role) {
             case 'ADMIN':
                 window.location.href = 'admin.html';
@@ -94,32 +105,70 @@ function populateAppointmentTable() {
             <td>${appointment.patientName}</td>
             <td>${appointment.doctor}</td>
             <td>${appointment.date}</td>
-            <td>${appointment.status}</td>
             <td>
                 <button onclick="editAppointment('${appointment.patientID}')">Edit</button>
-                <button onclick="deleteAppointment(${index})">Cancel</button>	 
-  <button onclick="confirmAppointment(${index})">Confirm</button>
+                <button onclick="deleteAppointment(${index})">Cancel</button>
             </td>
         `;
         tableBody.appendChild(row);
     });
 }
 
-
-
-function confirmAppointment(index) {
-    data.appointments[index].status = 'Confirmed';
-    populateAppointmentTable();
+// Close appointment function
+function deleteAppointment(index) {
+    data.appointments.splice(index, 1);
+    populateDoctorAppointmentTable();
 }
 
+function populateAppointmentTable1() {
+    const tableBody = document.querySelector('#appointmentTable tbody');
+    tableBody.innerHTML = '';
+    data.appointments1.forEach((appointment, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.doctor}</td>
+            <td>${appointment.date}</td>
+            <td>
+                <button onclick="editAppointment('${appointment.patientID}')">Edit</button>
+                <button onclick="deleteAppointment1(${index})">Cancel</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
 
+// Close appointment function
+function deleteAppointment1(index) {
+    data.appointments1.splice(index, 1);
+    populateDoctorAppointmentTable();
+}
 
+function populateAppointmentTable2() {
+    const tableBody = document.querySelector('#appointmentTable tbody');
+    tableBody.innerHTML = '';
+    data.appointments2.forEach((appointment, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.doctor}</td>
+            <td>${appointment.date}</td>
+            <td>
+                <button onclick="editAppointment2('${appointment.patientID}')">Edit</button>
+                <button onclick="deleteAppointment(${index})">Cancel</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
 
-
-
-
-
-
+// Close appointment function
+function deleteAppointment2(index) {
+    data.appointments2.splice(index, 1);
+    populateDoctorAppointmentTable();
+}
 
 
 // Populate appointments table on doctor page
@@ -146,8 +195,51 @@ function closeAppointment(index) {
     data.appointments.splice(index, 1);
     populateDoctorAppointmentTable();
 }
+function populateDoctorAppointmentTable1() {
+    const tableBody = document.querySelector('#doctorAppointmentTable tbody');
+    tableBody.innerHTML = '';
+    data.appointments1.forEach((appointment, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.date}</td>
+            <td>${appointment.status}</td>
+            <td>
+                <button onclick="closeAppointment1(${index})">Close</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+// Close appointment function
+function closeAppointment1(index) {
+    data.appointments1.splice(index, 1);
+    populateDoctorAppointmentTable();
+}
 
-
+function populateDoctorAppointmentTable2() {
+    const tableBody = document.querySelector('#doctorAppointmentTable tbody');
+    tableBody.innerHTML = '';
+    data.appointments1.forEach((appointment, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.date}</td>
+            <td>${appointment.status}</td>
+            <td>
+                <button onclick="closeAppointment2(${index})">Close</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+// Close appointment function
+function closeAppointment2(index) {
+    data.appointments2.splice(index, 1);
+    populateDoctorAppointmentTable();
+}
 
 // Refresh button handlers
 function setupRefreshButtons() {
@@ -162,38 +254,6 @@ function setupRefreshButtons() {
     }
 }
 
-
-function closeAppointment(index) {
-    data.appointments[index].status = 'Closed';
-    populateDoctorAppointmentTable();
-}
-
-
-function displayVersion() {
-    const versionElement = document.getElementById('version');
-    if (versionElement) {
-        versionElement.textContent = `Version: ${data.version}`;
-    }
-}
-
-function logout() {
-    const messageDiv = document.createElement('div');
-    messageDiv.textContent = 'Logged out successfully';
-    messageDiv.style.backgroundColor = 'green';
-    messageDiv.style.color = 'white';
-    messageDiv.style.padding = '10px';
-    messageDiv.style.position = 'fixed';
-    messageDiv.style.top = '10px';
-    messageDiv.style.left = '50%';
-    messageDiv.style.transform = 'translateX(-50%)';
-    document.body.appendChild(messageDiv);
-
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 2000);
-}
-
-
 // Add listeners and handlers based on the page
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('#loginForm')) {
@@ -207,5 +267,4 @@ document.addEventListener('DOMContentLoaded', () => {
         populateDoctorAppointmentTable();
         setupRefreshButtons();
     }
-	displayVersion();
 });
