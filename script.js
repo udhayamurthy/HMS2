@@ -39,6 +39,7 @@ function login(event) {
     const user = data.users.find(u => u.userID === userID && u.password === password);
     if (user) {
 		  console.log(`Login successful for User: ${user.name}, Role: ${user.role}`);
+      localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store user data in localStorage
         switch (user.role) {
             case 'ADMIN':
                 window.location.href = 'admin.html';
@@ -218,7 +219,7 @@ function displayUser() {
     if (user) {
         const userElement = document.getElementById('loggedInUserName');
         if (userElement) {
-            userElement.textContent = `Welcome, ${user.name}`;
+            userElement.innerHTML = `Welcome, <b>${user.name}</b>	`;
         }
     }
 }
@@ -248,7 +249,9 @@ function logout() {
 
 // Add listeners and handlers based on the page
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('#loginForm')) {
+    displayVersion();
+	displayUser();
+	if (document.querySelector('#loginForm')) {
         document.getElementById('loginForm').addEventListener('submit', login);
     } else if (document.querySelector('#userTable')) {
         populateUserTable();
@@ -259,6 +262,5 @@ document.addEventListener('DOMContentLoaded', () => {
         populateDoctorAppointmentTable();
         setupRefreshButtons();
     }
-	displayVersion();
-	displayUser();
+	
 });

@@ -8,6 +8,11 @@
 	
 		<style>
        
+	    #loggedInUserName b {
+            font-weight: bold;
+			color: darkblue;
+        }
+		
         .header-banner {
             background-color: #4CAF50;
             color: white;
@@ -82,9 +87,11 @@
 
 <div class="header-banner">
     <div class="logo">Hospital Management System</div>
-    <div class="login-info">
-    <span id="loggedInUserName"></span>
+     <div class="login-info">
+     <span id="loggedInUserName" ></span>
+	 <span> | </span>
     <span id="version"></span>
+	<span> | </span>
     <button onclick="logout()">Logout</button>
     </div>
 </div>
