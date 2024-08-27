@@ -31,7 +31,7 @@ const data = {
     "version": "1.0.1",
     
 };
-};
+
 
 function togglePassword() {
     const passwordField = document.getElementById('password');
@@ -118,6 +118,32 @@ function populateAppointmentTable() {
         `;
         tableBody.appendChild(row);
     });
+}
+
+function populateAppointmentTable(appointments = data.appointments) {
+    const tableBody = document.querySelector('#appointmentTable tbody');
+    tableBody.innerHTML = '';
+    appointments.forEach((appointment, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.doctor}</td>
+            <td>${appointment.date}</td>
+            <td>${appointment.status}</td>
+            <td>
+                <button onclick="editAppointment('${appointment.patientID}')">Edit</button>
+                <button onclick="deleteAppointment(${index})">Cancel</button>
+                <button onclick="confirmAppointment(${index})">Confirm</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function confirmAppointment(index) {
+    data.appointments[index].status = 'Confirmed';
+    populateAppointmentTable();
 }
 
 // Close appointment function
@@ -259,6 +285,14 @@ function setupRefreshButtons() {
         refreshFrontdeskBtn.addEventListener('click', populateAppointmentTable2);
     }
 }
+
+
+function closeAppointment(index) {
+    data.appointments[index].status = 'Closed';
+    populateDoctorAppointmentTable();
+}
+
+
 function displayVersion() {
     const versionElement = document.getElementById('version');
     if (versionElement) {
