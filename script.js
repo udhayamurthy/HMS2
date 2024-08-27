@@ -26,11 +26,9 @@ const data = {
         { "patientID": "P008", "patientName": "James Purple", "doctor": "Dr. Sony J", "date": "2024-08-28 13:30:00", "status": "Confirmed" },
         { "patientID": "P009", "patientName": "Isabella Yellow", "doctor": "Dr. Smith Right", "date": "2024-08-28 14:00:00", "status": "Pending" },
         { "patientID": "P010", "patientName": "Ethan Gray", "doctor": "Dr. Sony J", "date": "2024-08-28 14:30:00", "status": "Confirmed" }
-    ]
-	
-    "version": "1.0.1",
-    
-};
+    ],	
+    "version": "1.0.1"
+    };
 
 
 function togglePassword() {
