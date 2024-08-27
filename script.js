@@ -1,5 +1,6 @@
 ﻿// Simulated JSON data
 const data = {
+	"version": "1.0.1",
     "users": [
         { "userID": "admin", "password": "Admin123", "name": "SYS ADMIN", "role": "ADMIN" },
         { "userID": "smith", "password": "Doctor123", "name": "Dr Smith Right", "role": "DOCTOR" },
@@ -26,23 +27,8 @@ const data = {
         { "patientID": "P008", "patientName": "James Purple", "doctor": "Dr. Sony J", "date": "2024-08-28 13:30:00", "status": "Confirmed" },
         { "patientID": "P009", "patientName": "Isabella Yellow", "doctor": "Dr. Smith Right", "date": "2024-08-28 14:00:00", "status": "Pending" },
         { "patientID": "P010", "patientName": "Ethan Gray", "doctor": "Dr. Sony J", "date": "2024-08-28 14:30:00", "status": "Confirmed" }
-    ],	
-    "version": "1.0.1"
+    ]
     };
-
-
-function togglePassword() {
-    const passwordField = document.getElementById('password');
-    const togglePasswordIcon = document.querySelector('.toggle-password');
-    
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        togglePasswordIcon.textContent = '👁️'; // Change to an "eye" icon for visibility
-    } else {
-        passwordField.type = 'password';
-        togglePasswordIcon.textContent = '👁️'; // Change back to an "eye" icon for hidden
-    }
-}
 
 
 
