@@ -54,8 +54,10 @@ function login(event) {
     event.preventDefault();
     const userID = document.getElementById('userID').value;
     const password = document.getElementById('password').value;
+	 console.log(`Attempting login with UserID: ${userID}, Password: ${password}`);
     const user = data.users.find(u => u.userID === userID && u.password === password);
     if (user) {
+		  console.log(`Login successful for User: ${user.name}, Role: ${user.role}`);
         switch (user.role) {
             case 'ADMIN':
                 window.location.href = 'admin.html';
