@@ -83,6 +83,18 @@ function populateUserTable() {
     });
 }
 
+function addNewUser() {
+    alert('Add functionality not implemented.');
+}
+function editUser(index) {
+    alert('edit functionality not implemented.');
+}
+
+function deleteUser(index) {
+    data.users.splice(index, 1);
+    populateUserTable();
+}
+
 // Populate appointments table on frontdesk page
 function populateAppointmentTable() {
     const tableBody = document.querySelector('#appointmentTable tbody');
@@ -106,26 +118,21 @@ function populateAppointmentTable() {
 }
 
 function editAppointment(index) {
-	console.log(`Edit Appointment at index: ${index}`);
-
-    alert('Edit functionality not implemented.');
+	alert('Edit Appointment not implemented.');
 }
 
-function addNewAppointment(index) {
-    alert('Add functionality not implemented.');
+function addNewAppointment() {
+    alert('Add Appointment not implemented.');
 }
 
 function confirmAppointment(index) {
-	console.log(`Confirm Appointment at index: ${index}`);
-
     data.appointments[index].status = 'Confirmed';
     populateAppointmentTable();
 }
 
 
 function deleteAppointment(index) {
-	console.log(`Delete Appointment at index: ${index}`);
-    data.appointments.splice(index, 1);
+	data.appointments[index].status = 'Cancelled';
     populateAppointmentTable();
 }
 
@@ -211,17 +218,6 @@ function logout() {
 }
 
 
-function addNewUser(index) {
-    alert('Add functionality not implemented.');
-}
-function editUser(index) {
-    alert('edit functionality not implemented.');
-}
-
-function deleteUser(index) {
-    data.users.splice(index, 1);
-    populateUserTable();
-}
 
 
 
