@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header-banner">
+    <div class="logo">Hospital Management System</div>
+    <div style="position: absolute; top: 10px; right: 10px;">
+    <span id="version"></span>
+    <button onclick="logout()">Logout</button>
+</div>
+</div>
+    <h1>Admin Dashboard</h1>
+	
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Users will be populated here by JavaScript -->
+        </tbody>
+    </table>
+    <button onclick="addNewUser()">Add New User</button>
+    <script src="script.js"></script>
+</body>
+</html>
