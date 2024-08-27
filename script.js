@@ -63,12 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('loginForm').addEventListener('submit', login);
     }
 });
-
+/*
 // Populate user table
 function populateUserTable() {
     const tableBody = document.querySelector('#userTable tbody');
     tableBody.innerHTML = '';
-    data.users.forEach(user.index) => {
+    data.users.forEach(
+	(user.index) => 
+	{
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${user.userID}</td>
@@ -80,10 +82,30 @@ function populateUserTable() {
             </td>
         `;
         tableBody.appendChild(row);
+    }
+	);
+} */
+
+// Populate user table
+function populateUserTable() {
+    const tableBody = document.querySelector('#userTable tbody');
+    tableBody.innerHTML = '';
+    data.users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${user.userID}</td>
+            <td>${user.name}</td>
+            <td>${user.role}</td>
+            <td>
+                <button onclick="editUser('${user.userID}')">Edit</button>
+                <button onclick="deleteUser('${user.userID}')">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
     });
 }
 
-function addUser() {
+function addNewUser() {
     alert('Add functionality not implemented.');
 }
 function editUser(index) {
@@ -99,7 +121,8 @@ function deleteUser(index) {
 function populateAppointmentTable() {
     const tableBody = document.querySelector('#appointmentTable tbody');
     tableBody.innerHTML = '';
-    data.appointments.forEach((appointment, index) => {
+    data.appointments.forEach((appointment, index) => 
+	{
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${appointment.patientID}</td>
@@ -114,7 +137,8 @@ function populateAppointmentTable() {
             </td>
         `;
         tableBody.appendChild(row);
-    });
+    }
+	);
 }
 
 function editAppointment(index) {
