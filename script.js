@@ -158,23 +158,32 @@ function displayVersion() {
     }
 }
 
-function logout() {
-    
-window.location.href = 'index.html';
+// Display logged-in user name
+function displayUser() {
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (user) {
+        const userElement = document.getElementById('loggedInUserName');
+        if (userElement) {
+            userElement.textContent = `Welcome, ${user.name}`;
+        }
+    }
+}
 
+function logout() {
+    localStorage.removeItem('loggedInUser'); // Remove user data from localStorage
     setTimeout(() => {
-        
-		const messageDiv = document.createElement('div');
-    messageDiv.textContent = 'Logged out successfully';
-    messageDiv.style.backgroundColor = 'green';
-    messageDiv.style.color = 'white';
-    messageDiv.style.padding = '10px';
-    messageDiv.style.position = 'fixed';
-    messageDiv.style.top = '10px';
-    messageDiv.style.left = '50%';
-    messageDiv.style.transform = 'translateX(-50%)';
-    document.body.appendChild(messageDiv);
-    }, 1000);
+        window.location.href = 'index.html';
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = 'Logged out successfully';
+        messageDiv.style.backgroundColor = 'green';
+        messageDiv.style.color = 'white';
+        messageDiv.style.padding = '10px';
+        messageDiv.style.position = 'fixed';
+        messageDiv.style.top = '10px';
+        messageDiv.style.left = '50%';
+        messageDiv.style.transform = 'translateX(-50%)';
+        document.body.appendChild(messageDiv);
+    }, 2000);
 }
 
 
@@ -192,4 +201,5 @@ document.addEventListener('DOMContentLoaded', () => {
         setupRefreshButtons();
     }
 	displayVersion();
+	displayUser();
 });
