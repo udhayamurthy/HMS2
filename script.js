@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function populateUserTable() {
     const tableBody = document.querySelector('#userTable tbody');
     tableBody.innerHTML = '';
-    data.users.forEach(user => {
+    data.users.forEach(user.index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${user.userID}</td>
@@ -83,7 +83,7 @@ function populateUserTable() {
     });
 }
 
-function addNewUser() {
+function addUser() {
     alert('Add functionality not implemented.');
 }
 function editUser(index) {
