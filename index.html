@@ -5,20 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles.css">
-   
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 5px;
+        }
+        .input-container {
+            position: relative;
+        }
+        .input-container input {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <h1>Hospital Management System</h1>
     <form id="loginForm">
-        <label for="userID">User ID:</label>
-        <input type="text" id="userID" name="userID" required>
+        <div class="input-container">
+            <label for="userID">User ID:</label>
+            <input type="text" id="userID" name="userID" required>
+            <div id="userIDError" class="error-message"></div>
+        </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <div class="input-container">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="passwordError" class="error-message"></div>
+        </div>
+
         <button type="submit">Login</button>
-       <a href="forgot-password.html" class="forgot-password-link">Forgot Password?</a>
+        <a href="forgot-password.html" class="forgot-password-link">Forgot Password?</a>
     </form>
 
+    <script>
+        // Set default cursor and focus on User ID field on page load
+        window.onload = function() {
+            document.getElementById('userID').focus();
+        };
+
+        // Convert User ID input to lowercase
+        document.getElementById('userID').addEventListener('input', function () {
+            this.value = this.value.toLowerCase();
+            document.getElementById('userIDError').textContent = '';
+        });
+
+        // Clear password error message when typing
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('passwordError').textContent = '';
+        });
+
+       
+    </script>
    <script src="script.js"></script>
 </body>
 </html>

@@ -142,6 +142,28 @@ function populateAppointmentTable() {
 	);
 }
 
+function populateAppointmentTable1() {
+    const tableBody = document.querySelector('#appointmentTable tbody');
+    tableBody.innerHTML = '';
+    data.appointments1.forEach((appointment, index) => 
+	{
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.doctor}</td>
+            <td>${appointment.date}</td>
+            <td>${appointment.status}</td>
+            <td>
+                <button onclick="editAppointment(${index})">Edit</button>
+                <button onclick="deleteAppointment1(${index})">Cancel</button>	 
+				<button onclick="confirmAppointment1(${index})">Confirm</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    }
+	);
+}
 function editAppointment(index) {
 	alert('Edit Appointment not implemented.');
 }
@@ -161,6 +183,16 @@ function deleteAppointment(index) {
     populateAppointmentTable();
 }
 
+function confirmAppointment1(index) {
+    data.appointments1[index].status = 'Confirmed';
+    populateAppointmentTable1();
+}
+
+
+function deleteAppointment1(index) {
+	data.appointments1[index].status = 'Cancelled';
+    populateAppointmentTable1();
+}
 
 // Populate appointments table on doctor page
 function populateDoctorAppointmentTable() {
@@ -189,20 +221,44 @@ function closeAppointment(index) {
     populateDoctorAppointmentTable(); // Refresh the table after updating
 }
 
+function populateDoctorAppointmentTable2() {
+    const tableBody = document.querySelector('#doctorAppointmentTable tbody');
+    tableBody.innerHTML = '';
+    data.appointments2.forEach((appointment, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${appointment.patientID}</td>
+            <td>${appointment.patientName}</td>
+            <td>${appointment.date}</td>
 
+            <td>${appointment.status}</td>
+            <td>
+                <button onclick="closeAppointment2(${index})">Close</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Close appointment function
+
+function closeAppointment2(index) {
+    data.appointments2[index].status = "Closed";
+    populateDoctorAppointmentTable2(); // Refresh the table after updating
+}
 // Refresh button handlers
 function setupRefreshButtons() {
     const refreshDoctorBtn = document.getElementById('refreshDoctorBtn');
     if (refreshDoctorBtn) {
-        refreshDoctorBtn.addEventListener('click', populateDoctorAppointmentTable);
+        refreshDoctorBtn.addEventListener('click', populateDoctorAppointmentTable2);
     }
 const refreshAdminBtn = document.getElementById('refreshAdminBtn');
     if (refreshAdminBtn) {
-        refreshAdminBtn.addEventListener('click', populateUserTable );
+        refreshAdminBtn.addEventListener('click', populateUserTable);
     }
     const refreshFrontdeskBtn = document.getElementById('refreshFrontdeskBtn');
     if (refreshFrontdeskBtn) {
-        refreshFrontdeskBtn.addEventListener('click', populateAppointmentTable);
+        refreshFrontdeskBtn.addEventListener('click', populateAppointmentTable1);
     }
 }
 
@@ -228,11 +284,11 @@ function logout() {
    
 	 const messageDiv = document.createElement('div');
         messageDiv.textContent = 'Logged out successfully';
-        messageDiv.style.backgroundColor = 'green';
+        messageDiv.style.backgroundColor = 'Blue';
         messageDiv.style.color = 'white';
         messageDiv.style.padding = '10px';
         messageDiv.style.position = 'fixed';
-        messageDiv.style.top = '10px';
+        messageDiv.style.top = '20px';
         messageDiv.style.left = '50%';
         messageDiv.style.transform = 'translateX(-50%)';
         document.body.appendChild(messageDiv);
