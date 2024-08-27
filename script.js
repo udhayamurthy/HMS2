@@ -75,8 +75,8 @@ function populateUserTable() {
             <td>${user.name}</td>
             <td>${user.role}</td>
             <td>
-                <button onclick="editUser('${user.userID}')">Edit</button>
-                <button onclick="deleteUser('${user.userID}')">Delete</button>
+                <button onclick="editUser(${index})">Edit</button>
+                <button onclick="deleteUser(${index})">Delete</button>
             </td>
         `;
         tableBody.appendChild(row);
@@ -96,7 +96,7 @@ function populateAppointmentTable() {
             <td>${appointment.date}</td>
             <td>${appointment.status}</td>
             <td>
-                <button onclick="editAppointment('${appointment.patientID}')">Edit</button>
+                <button onclick="editAppointment(${index})">Edit</button>
                 <button onclick="deleteAppointment(${index})">Cancel</button>	 
 				<button onclick="confirmAppointment(${index})">Confirm</button>
             </td>
@@ -110,6 +110,13 @@ function confirmAppointment(index) {
     populateAppointmentTable();
 }
 
+
+function deleteAppointment(index) {
+    data.appointments.splice(index, 1);
+    populateAppointmentTable();
+}
+
+
 // Populate appointments table on doctor page
 function populateDoctorAppointmentTable() {
     const tableBody = document.querySelector('#doctorAppointmentTable tbody');
@@ -120,6 +127,7 @@ function populateDoctorAppointmentTable() {
             <td>${appointment.patientID}</td>
             <td>${appointment.patientName}</td>
             <td>${appointment.date}</td>
+
             <td>${appointment.status}</td>
             <td>
                 <button onclick="closeAppointment(${index})">Close</button>
@@ -130,10 +138,12 @@ function populateDoctorAppointmentTable() {
 }
 
 // Close appointment function
+
 function closeAppointment(index) {
-    data.appointments.splice(index, 1);
-    populateDoctorAppointmentTable();
+    data.appointments[index].status = "Closed";
+    populateDoctorAppointmentTable(); // Refresh the table after updating
 }
+
 
 // Refresh button handlers
 function setupRefreshButtons() {
@@ -143,11 +153,11 @@ function setupRefreshButtons() {
     }
 const refreshAdminBtn = document.getElementById('refreshAdminBtn');
     if (refreshAdminBtn) {
-        refreshAdminBtn.addEventListener('click', populateAppointmentTable2);
+        refreshAdminBtn.addEventListener('click', populateUserTable );
     }
     const refreshFrontdeskBtn = document.getElementById('refreshFrontdeskBtn');
     if (refreshFrontdeskBtn) {
-        refreshFrontdeskBtn.addEventListener('click', populateUserTable);
+        refreshFrontdeskBtn.addEventListener('click', populateAppointmentTable);
     }
 }
 
@@ -171,9 +181,7 @@ function displayUser() {
 
 function logout() {
     localStorage.removeItem('loggedInUser'); // Remove user data from localStorage
-    setTimeout(() => {
-        window.location.href = 'index.html';
-        const messageDiv = document.createElement('div');
+	 const messageDiv = document.createElement('div');
         messageDiv.textContent = 'Logged out successfully';
         messageDiv.style.backgroundColor = 'green';
         messageDiv.style.color = 'white';
@@ -183,8 +191,33 @@ function logout() {
         messageDiv.style.left = '50%';
         messageDiv.style.transform = 'translateX(-50%)';
         document.body.appendChild(messageDiv);
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    
     }, 2000);
 }
+
+function editAppointment(index) {
+    alert('Edit functionality not implemented.');
+}
+
+function addAppointment(index) {
+    alert('Add functionality not implemented.');
+}
+
+function addUser(index) {
+    alert('Add functionality not implemented.');
+}
+function editUser(index) {
+    alert('edit functionality not implemented.');
+}
+
+function deleteUser(index) {
+    data.users.splice(index, 1);
+    populateUserTable();
+}
+
+
 
 
 // Add listeners and handlers based on the page
